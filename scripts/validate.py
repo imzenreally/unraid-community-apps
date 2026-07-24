@@ -52,9 +52,17 @@ for path in templates:
     configs = root.findall("Config")
     targets = [item.attrib.get("Target") for item in configs]
     check(len(targets) == len(set(targets)), f"{path.name} has duplicate Config targets")
+    required_provider_targets = {
+        "OPENSKY_CLIENT_ID",
+        "OPENSKY_CLIENT_SECRET",
+        "OLLAMA_API_URL",
+        "OLLAMA_API_KEY",
+        "OLLAMA_MODEL",
+    }
+    check(required_provider_targets.issubset(set(targets)), f"{path.name} is missing required OpenSky/Ollama fields")
     for item in configs:
         target = item.attrib.get("Target", "")
-        if any(marker in target for marker in ("KEY", "TOKEN", "PASSWORD")):
+        if any(marker in target for marker in ("KEY", "TOKEN", "PASSWORD", "SECRET")):
             check(item.attrib.get("Mask") == "true", f"{path.name}: {target} must be masked")
 
 if errors:

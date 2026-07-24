@@ -21,7 +21,7 @@ Only the dashboard HTTP port is published. It does not require privileged mode, 
 
 ### Beta status
 
-This listing has passed manual runtime testing but has **not yet been submitted to Community Applications**. The beta image is published at:
+This listing has passed manual runtime testing and has been submitted to Community Applications for review. The beta image is published at:
 
 ```text
 ghcr.io/imzenreally/worldmonitor-unraid-aio:beta

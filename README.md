@@ -24,14 +24,14 @@ Only the dashboard HTTP port is published. It does not require privileged mode, 
 This listing is prepared for manual Unraid testing and has **not yet been submitted to Community Applications**. The first published image is expected at:
 
 ```text
-ghcr.io/imzenreally/worldmonitor-aio:latest
+ghcr.io/imzenreally/worldmonitor-unraid-aio:beta
 ```
 
 Complete source, build workflow, tests, security notes, and the manual installation guide:
 
-- [World Monitor AIO source](https://github.com/imzenreally/worldmonitor)
-- [Unraid installation and operations guide](https://github.com/imzenreally/worldmonitor/blob/main/docs/UNRAID.md)
-- [Packaging support](https://github.com/imzenreally/worldmonitor/issues)
+- [World Monitor AIO source](https://github.com/imzenreally/worldmonitor-unraid-aio)
+- [Unraid installation and operations guide](https://github.com/imzenreally/worldmonitor-unraid-aio/blob/main/docs/UNRAID.md)
+- [Packaging support](https://github.com/imzenreally/worldmonitor-unraid-aio/issues)
 
 ### Important security note
 
@@ -43,4 +43,4 @@ The template maps one dedicated appdata directory to `/config`. It contains gene
 
 ### License
 
-The template metadata in this repository is MIT licensed. World Monitor and the derivative AIO image are distributed under AGPL-3.0-or-later; complete corresponding source is available in the source repository above. This package is not affiliated with or endorsed by the upstream World Monitor maintainer.
+The template metadata in this repository is MIT licensed. World Monitor and the derivative AIO image are distributed under AGPL-3.0-only; complete corresponding source is available in the source repository above. This package is not affiliated with or endorsed by the upstream World Monitor maintainer.

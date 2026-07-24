@@ -36,8 +36,16 @@ for path in templates:
     check(root.attrib.get("version") == "2", f"{path.name} must use Container version 2")
     for tag in ("Name", "Repository", "Registry", "Network", "WebUI", "Overview", "Support", "Project", "TemplateURL", "ReadMe", "Category", "License"):
         check(bool((root.findtext(tag) or "").strip()), f"{path.name} is missing {tag}")
+    check(root.findtext("Name") == "World Monitor AIO (Unofficial)", f"{path.name} must identify the package as unofficial")
+    check(root.findtext("Repository") == "ghcr.io/imzenreally/worldmonitor-unraid-aio:beta", f"{path.name} has the wrong beta image")
+    check(root.findtext("Registry") == "https://github.com/users/imzenreally/packages/container/package/worldmonitor-unraid-aio", f"{path.name} has the wrong package page")
+    check(root.findtext("Beta") == "true", f"{path.name} must be marked beta")
+    check(root.findtext("License") == "AGPL-3.0-only", f"{path.name} has the wrong image license")
     check(root.findtext("Privileged") == "false", f"{path.name} must not be privileged")
     check(root.findtext("Network") == "bridge", f"{path.name} must use bridge networking")
+    extra = root.findtext("ExtraParams") or ""
+    for option in ("--read-only", "no-new-privileges", "--cap-drop=ALL", "--cap-add=CHOWN", "--cap-add=FOWNER", "--cap-add=SETUID", "--cap-add=SETGID"):
+        check(option in extra, f"{path.name} is missing hardening option {option}")
     configs = root.findall("Config")
     targets = [item.attrib.get("Target") for item in configs]
     check(len(targets) == len(set(targets)), f"{path.name} has duplicate Config targets")

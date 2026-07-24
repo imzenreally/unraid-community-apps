@@ -1,32 +1,46 @@
-# Community Apps Starter Template
+# imzenreally Unraid Community Applications
 
-Use this repository as a GitHub template when you want a clean starting point for a new Community Apps submission repository.
+Community Applications metadata maintained by [imzenreally](https://github.com/imzenreally).
 
-## Quick Start
+## World Monitor AIO
 
-1. Click **Use this template** on GitHub and create your own repository.
-2. Replace the placeholder values in `ca_profile.xml`, `templates/example-app.xml`, and `plugins/example-plugin.xml`.
-3. Replace `icon.svg` with your own repository icon, or update `ca_profile.xml` to point at a hosted icon you control.
-4. Keep one XML file per Docker app under `templates/`.
-5. Keep one XML wrapper per plugin under `plugins/`.
-6. Delete the example files you do not need.
-7. Commit and push your repository.
-8. Run **Validate** and **Scan** in the Community Apps submit flow: `/submit`.
+**World Monitor AIO** is an unofficial, all-in-one Unraid package for [World Monitor](https://github.com/koala73/worldmonitor), a real-time global intelligence dashboard.
 
-## Starter Files
+The container includes:
 
-- `README.md`: onboarding notes for whoever maintains the repository.
-- `LICENSE`: starter MIT license text. Replace the placeholder copyright line.
-- `.gitignore`: keeps common OS junk out of the repo.
-- `icon.svg`: starter repository icon referenced by `ca_profile.xml`.
-- `ca_profile.xml`: repository overview and support metadata shown in Community Apps.
-- `templates/example-app.xml`: starter Docker application template.
-- `plugins/example-plugin.xml`: starter plugin wrapper.
+- World Monitor frontend
+- Local Node API
+- Authenticated Redis cache
+- Loopback-only Redis REST adapter
+- Optional loopback-only AIS relay
+- Scheduled data seeders
 
-## Submission Notes
+Only the dashboard HTTP port is published. It does not require privileged mode, host networking, the Docker socket, host devices, or access to Unraid storage outside its dedicated appdata directory.
 
-- Keep `ca_profile.xml` in the repository root.
-- Every Docker app entry needs a `<Repository>` tag.
-- Every plugin entry needs a `<PluginURL>` tag.
-- Keep each template's `TemplateURL` pointed at the raw GitHub URL for that exact XML file.
-- Use an OSI-approved license before submitting.
+![World Monitor dashboard](assets/worldmonitor-dashboard.png)
+
+### Beta status
+
+This listing is prepared for manual Unraid testing and has **not yet been submitted to Community Applications**. The first published image is expected at:
+
+```text
+ghcr.io/imzenreally/worldmonitor-unraid-aio:beta
+```
+
+Complete source, build workflow, tests, security notes, and the manual installation guide:
+
+- [World Monitor AIO source](https://github.com/imzenreally/worldmonitor-unraid-aio)
+- [Unraid installation and operations guide](https://github.com/imzenreally/worldmonitor-unraid-aio/blob/main/docs/UNRAID.md)
+- [Packaging support](https://github.com/imzenreally/worldmonitor-unraid-aio/issues)
+
+### Important security note
+
+World Monitor does not provide built-in user authentication. Keep it accessible only on a trusted LAN or VPN unless it is protected by an authenticated reverse proxy. Do not expose its HTTP port directly to the public internet.
+
+### Persistent data
+
+The template maps one dedicated appdata directory to `/config`. It contains generated internal credentials, Redis data, and seeder state. No API key is required to start; optional integrations are available as masked Advanced variables.
+
+### License
+
+The template metadata in this repository is MIT licensed. World Monitor and the derivative AIO image are distributed under AGPL-3.0-only; complete corresponding source is available in the source repository above. This package is not affiliated with or endorsed by the upstream World Monitor maintainer.

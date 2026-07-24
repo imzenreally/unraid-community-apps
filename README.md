@@ -10,8 +10,8 @@ The container includes:
 
 - World Monitor frontend
 - Local Node API
-- Authenticated Redis cache
-- Loopback-only Redis REST adapter
+- Authenticated Valkey cache
+- Loopback-only Redis-compatible REST adapter
 - Optional loopback-only AIS relay
 - Scheduled data seeders
 
@@ -21,7 +21,7 @@ Only the dashboard HTTP port is published. It does not require privileged mode, 
 
 ### Beta status
 
-This listing is prepared for manual Unraid testing and has **not yet been submitted to Community Applications**. The first published image is expected at:
+This listing has passed manual runtime testing but has **not yet been submitted to Community Applications**. The beta image is published at:
 
 ```text
 ghcr.io/imzenreally/worldmonitor-unraid-aio:beta
@@ -31,6 +31,7 @@ Complete source, build workflow, tests, security notes, and the manual installat
 
 - [World Monitor AIO source](https://github.com/imzenreally/worldmonitor-unraid-aio)
 - [Unraid installation and operations guide](https://github.com/imzenreally/worldmonitor-unraid-aio/blob/main/docs/UNRAID.md)
+- [Getting third-party API keys](https://github.com/imzenreally/worldmonitor-unraid-aio/blob/main/docs/UNRAID_API_KEYS.md)
 - [Packaging support](https://github.com/imzenreally/worldmonitor-unraid-aio/issues)
 
 ### Important security note
@@ -39,7 +40,7 @@ World Monitor does not provide built-in user authentication. Keep it accessible 
 
 ### Persistent data
 
-The template maps one dedicated appdata directory to `/config`. It contains generated internal credentials, Redis data, and seeder state. No API key is required to start; optional integrations are available as masked Advanced variables.
+The template maps one dedicated appdata directory to `/config`. It contains generated internal credentials, Valkey data, and seeder state. No API key is required to start; optional integrations are available as masked Advanced variables.
 
 ### License
 

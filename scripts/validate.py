@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 from pathlib import Path
+import re
 import sys
 import xml.etree.ElementTree as ET
 
@@ -36,7 +37,9 @@ for path in templates:
     check(root.attrib.get("version") == "2", f"{path.name} must use Container version 2")
     for tag in ("Name", "Repository", "Registry", "Network", "WebUI", "Overview", "Support", "Project", "TemplateURL", "ReadMe", "Category", "License"):
         check(bool((root.findtext(tag) or "").strip()), f"{path.name} is missing {tag}")
-    check(root.findtext("Name") == "World Monitor AIO (Unofficial)", f"{path.name} must identify the package as unofficial")
+    name = root.findtext("Name") or ""
+    check(name == "WorldMonitorAIO-Unofficial", f"{path.name} must identify the package as unofficial")
+    check(bool(re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_.-]*", name)), f"{path.name} Name must be a valid Docker container name")
     check(root.findtext("Repository") == "ghcr.io/imzenreally/worldmonitor-unraid-aio:beta", f"{path.name} has the wrong beta image")
     check(root.findtext("Registry") == "https://github.com/users/imzenreally/packages/container/package/worldmonitor-unraid-aio", f"{path.name} has the wrong package page")
     check(root.findtext("Beta") == "true", f"{path.name} must be marked beta")

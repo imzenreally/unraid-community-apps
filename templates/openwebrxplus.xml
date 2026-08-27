@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>OpenWebRX-Plus</Name>
+  <Repository>slechev/openwebrxplus-softmbe:latest</Repository>
+  <Registry>https://hub.docker.com/r/slechev/openwebrxplus-softmbe</Registry>
+  <Network>bridge</Network>
+  <Shell>bash</Shell>
+  <Privileged>false</Privileged>
+  <WebUI>http://[IP]:[PORT:8073]/</WebUI>
+  <Icon>https://raw.githubusercontent.com/imzenreally/unraid-community-apps/main/assets/openwebrxplus.png</Icon>
+  <Overview>Browser-based, multi-user software-defined radio receiver with a live spectrum and waterfall, browser audio, scanning, recording, analog modes, digital decoders, and SoftMBE digital voice support.</Overview>
+  <Description>OpenWebRX+ lets users tune and listen to a supported SDR from a modern browser. This template uses the SoftMBE image for DMR, D-Star, YSF, NXDN, FreeDV, and DRM support in addition to OpenWebRX+ analog and digital modes. The default device mapping exposes the host USB bus so the container can access an attached SDR. Keep the receiver on a trusted LAN or VPN unless it is intentionally secured for public multi-user access.</Description>
+  <Support>https://github.com/imzenreally/unraid-community-apps/issues</Support>
+  <Project>https://github.com/luarvique/openwebrx</Project>
+  <TemplateURL>https://raw.githubusercontent.com/imzenreally/unraid-community-apps/main/templates/openwebrxplus.xml</TemplateURL>
+  <ReadMe>https://raw.githubusercontent.com/imzenreally/unraid-community-apps/main/README.md</ReadMe>
+  <Category>MediaApp:Other Network:Other</Category>
+  <ExtraSearchTerms>openwebrx openwebrxplus sdr software defined radio rtl-sdr rtlsdr airspy sdrplay hackrf radio scanner waterfall</ExtraSearchTerms>
+  <Requires>Unraid 6.12 or newer and a supported SDR. The default mapping exposes /dev/bus/usb. A physical SDR normally cannot be opened by multiple containers at once; stop any ADS-B or feeder container using the dongle, or dedicate a second SDR to OpenWebRX+.</Requires>
+  <Changes>2026-08-27: Initial Unraid Community Applications template using the actively maintained OpenWebRX+ SoftMBE image.</Changes>
+  <Date>2026-08-27</Date>
+  <MinVer>6.12</MinVer>
+  <License>AGPL-3.0-only</License>
+  <ExtraParams>--tmpfs /tmp:rw,nosuid,nodev,mode=1777</ExtraParams>
+
+  <Config Name="Web UI" Target="8073" Default="8073" Mode="tcp" Description="OpenWebRX+ browser interface. Change the host port if 8073 is already in use." Type="Port" Display="always" Required="true" Mask="false"/>
+  <Config Name="Configuration" Target="/etc/openwebrx" Default="/mnt/user/appdata/openwebrxplus/etc" Mode="rw" Description="Persistent OpenWebRX+ configuration and user database." Type="Path" Display="always" Required="true" Mask="false"/>
+  <Config Name="Application data" Target="/var/lib/openwebrx" Default="/mnt/user/appdata/openwebrxplus/var" Mode="rw" Description="Persistent bookmarks, recordings, decoder output, and runtime data." Type="Path" Display="always" Required="true" Mask="false"/>
+  <Config Name="SDR USB bus" Target="/dev/bus/usb" Default="/dev/bus/usb" Mode="" Description="USB device tree used to access attached SDR hardware. Remove this mapping for a network-only SDR." Type="Device" Display="always" Required="false" Mask="false"/>
+  <Config Name="Time zone" Target="TZ" Default="America/Los_Angeles" Description="IANA time zone name, for example America/Los_Angeles." Type="Variable" Display="always" Required="true" Mask="false"/>
+  <Config Name="Admin username" Target="OPENWEBRX_ADMIN_USER" Default="admin" Description="Initial administrator username. The image creates this account on first start if it does not already exist." Type="Variable" Display="always" Required="true" Mask="false"/>
+  <Config Name="Admin password" Target="OPENWEBRX_ADMIN_PASSWORD" Default="" Description="Initial administrator password. Required on first installation and masked in the Unraid form." Type="Variable" Display="always" Required="true" Mask="true"/>
+</Container>

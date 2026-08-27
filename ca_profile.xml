@@ -1,5 +1,5 @@
 <CommunityApplications>
-  <Profile>Unofficial, security-conscious Unraid packaging maintained by imzenreally. World Monitor AIO combines the World Monitor dashboard, local API, private Valkey cache, optional AIS relay, and scheduled seeders in one container.</Profile>
+  <Profile>Security-conscious Unraid Community Applications packaging maintained by imzenreally. Templates include the OpenWebRX+ browser-based software-defined radio receiver and the unofficial World Monitor AIO global intelligence dashboard.</Profile>
   <Icon>https://raw.githubusercontent.com/imzenreally/unraid-community-apps/main/icon.svg</Icon>
   <WebPage>https://github.com/imzenreally/unraid-community-apps</WebPage>
   <Photo>https://raw.githubusercontent.com/imzenreally/unraid-community-apps/main/assets/worldmonitor-dashboard.png</Photo>
